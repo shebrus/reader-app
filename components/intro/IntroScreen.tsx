@@ -1,79 +1,64 @@
-// Стартовый экран приложения: показывает название, подзаголовок и декоративную стопку последних книг.
-import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
+// Стартовый экран приложения: собирает заголовок и интерактивную карусель книг.
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Animated, StyleSheet, useWindowDimensions, View } from "react-native";
 
-import { BookCardNew } from "../BookCardNew";
+import { IntroBookCarousel } from "./IntroBookCarousel";
+import { IntroTitle } from "./IntroTitle";
+import { DESIGN_HEIGHT, DESIGN_WIDTH } from "./introLayout";
 
-const DESIGN_WIDTH = 375;
-const DESIGN_HEIGHT = 812;
+type IntroScreenProps = {
+  onCarouselActiveChange?: (active: boolean) => void;
+};
 
-const introBooks = [
-  {
-    id: "back",
-    coverImage: require("../../assets/covers/cover2.png"),
-    width: 216,
-    top: 232,
-  },
-  {
-    id: "middle",
-    coverImage: require("../../assets/covers/cover4.png"),
-    width: 243,
-    top: 283,
-  },
-  {
-    id: "front",
-    coverImage: require("../../assets/covers/cover1.png"),
-    width: 270,
-    top: 340,
-  },
-];
-
-export function IntroScreen() {
+export function IntroScreen({ onCarouselActiveChange }: IntroScreenProps) {
   const { width, height } = useWindowDimensions();
+  const [carouselActive, setCarouselActive] = useState(false);
+  const [isRotating, setIsRotating] = useState(false);
 
-  // Масштаб сохраняет пропорции макета 375x812 на экранах другого размера.
+  // progress отвечает за раскрытие стопки: 0 - стопка, 1 - карусель.
+  const progress = useRef(new Animated.Value(0)).current;
+
   const scale = Math.min(width / DESIGN_WIDTH, height / DESIGN_HEIGHT);
+  const canvasLeft = (width - DESIGN_WIDTH * scale) / 2;
+
+  useEffect(() => {
+    onCarouselActiveChange?.(carouselActive);
+  }, [carouselActive, onCarouselActiveChange]);
+
+  const textOpacity = useMemo(() => {
+    return progress.interpolate({
+      inputRange: [0, 0.7],
+      outputRange: [1, 0],
+      extrapolate: "clamp",
+    });
+  }, [progress]);
+
+  const textTranslateY = useMemo(() => {
+    return progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -22 * scale],
+      extrapolate: "clamp",
+    });
+  }, [progress, scale]);
 
   return (
     <View style={styles.root}>
-      <View
-        style={[
-          styles.copyBlock,
-          { top: 44 * scale, width: 289 * scale, gap: 8 * scale },
-        ]}
-      >
-        <Text style={[styles.title, { fontSize: 58 * scale, lineHeight: 80 * scale }]}>
-          StoryNest
-        </Text>
-        <Text
-          style={[
-            styles.subtitle,
-            { fontSize: 20 * scale, lineHeight: 24 * scale },
-          ]}
-        >
-          Приложение для чтения{"\n"}ваших любимых книг
-        </Text>
-      </View>
+      <IntroTitle
+        opacity={textOpacity}
+        scale={scale}
+        translateY={textTranslateY}
+      />
 
-      <View pointerEvents="none" style={StyleSheet.absoluteFill}>
-        {introBooks.map((book) => {
-          const scaledWidth = book.width * scale;
-
-          return (
-            <BookCardNew
-              key={book.id}
-              coverImage={book.coverImage}
-              width={scaledWidth}
-              style={[
-                styles.book,
-                {
-                  left: (width - scaledWidth) / 2,
-                  top: book.top * scale,
-                },
-              ]}
-            />
-          );
-        })}
-      </View>
+      <IntroBookCarousel
+        canvasLeft={canvasLeft}
+        carouselActive={carouselActive}
+        isRotating={isRotating}
+        onActiveChange={setCarouselActive}
+        onRotatingChange={setIsRotating}
+        progress={progress}
+        scale={scale}
+        width={width}
+      />
     </View>
   );
 }
@@ -82,31 +67,5 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: "#F5F5F5",
-  },
-
-  copyBlock: {
-    position: "absolute",
-    alignSelf: "center",
-    alignItems: "center",
-    width: 289,
-    gap: 8,
-  },
-
-  title: {
-    fontFamily: "SourceSerif4-48-Regular",
-    fontWeight: "400",
-    color: "#000000",
-    textAlign: "center",
-  },
-
-  subtitle: {
-    fontFamily: "SFProText-Light",
-    fontWeight: "300",
-    color: "#7C7C7C",
-    textAlign: "center",
-  },
-
-  book: {
-    position: "absolute",
   },
 });

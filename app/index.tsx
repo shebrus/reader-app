@@ -13,6 +13,7 @@ const OPEN_VELOCITY = -650;
 export default function HomeScreen() {
   const { height } = useWindowDimensions();
   const [introCompleted, setIntroCompleted] = useState(false);
+  const [carouselActive, setCarouselActive] = useState(false);
 
   // Основная позиция всей вертикальной страницы: 0 - стартовый экран, -height - экран категорий.
   const baseTranslateY = useRef(new Animated.Value(0)).current;
@@ -77,7 +78,7 @@ export default function HomeScreen() {
 
   return (
     <PanGestureHandler
-      enabled={!introCompleted}
+      enabled={!introCompleted && !carouselActive}
       onGestureEvent={handleGesture}
       onHandlerStateChange={handleHandlerStateChange}
     >
@@ -92,7 +93,7 @@ export default function HomeScreen() {
           ]}
         >
           <View style={[styles.screen, { height }]}>
-            <IntroScreen />
+            <IntroScreen onCarouselActiveChange={setCarouselActive} />
           </View>
 
           <View style={[styles.screen, { height }]}>
