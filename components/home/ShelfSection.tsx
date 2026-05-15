@@ -1,5 +1,5 @@
-// одна секция полки: название, количество книг, горизонтальный список книг, синяя плашка.
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+// Одна секция полки: название, количество книг, горизонтальный список книг, синяя плашка и открытие экрана полки.
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { BookCardNew } from "../BookCardNew";
 import { HomeScreenOverlay } from "../HomeScreenOverlay";
@@ -17,6 +17,7 @@ type ShelfSectionProps = {
   books: Book[];
   bookCount: number;
   index: number;
+  onPress?: () => void;
 };
 
 export function ShelfSection({
@@ -24,16 +25,21 @@ export function ShelfSection({
   books,
   bookCount,
   index,
+  onPress,
 }: ShelfSectionProps) {
   return (
     <View style={styles.shelfWrapper}>
-      <View style={styles.rowHeader}>
+      <Pressable
+        disabled={!onPress}
+        onPress={onPress}
+        style={styles.rowHeader}
+      >
         <Text style={styles.rowTitle}>{shelf.title}</Text>
 
         <View style={styles.rowHeaderRight}>
           <Text style={styles.count}>{getBookCountLabel(bookCount)}</Text>
         </View>
-      </View>
+      </Pressable>
 
       <ScrollView
         horizontal

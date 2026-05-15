@@ -5,6 +5,11 @@ export type Book = {
   id: string;
   coverImage: ImageSourcePropType;
   shelfId: string;
+  shelfIds?: string[];
+  title: string;
+  author: string;
+  pagesRead: number;
+  totalPages: number;
 };
 
 export type Shelf = {

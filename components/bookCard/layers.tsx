@@ -59,5 +59,10 @@ export const CoverLayer = ({
 };
 
 export const SvgLayer = ({ source, style }: SvgLayerProps) => (
-  <ExpoImage source={source} contentFit="fill" style={[styles.layer, style]} />
+  <ExpoImage
+    source={source}
+    contentFit="fill"
+    cachePolicy="memory-disk"
+    style={[styles.layer, style]}
+  />
 );

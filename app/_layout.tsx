@@ -11,6 +11,7 @@ export default function RootLayout() {
     "SourceSerif4-Light": require("../assets/fonts/SourceSerif4-Light.ttf"),
     "SFProDisplay-Light": require("../assets/fonts/SF-Pro-Display-Light.otf"),
     "SFProText-Light": require("../assets/fonts/SF-Pro-Text-Light.otf"),
+    "SFProText-Regular": require("../assets/fonts/SF-Pro-Text-Regular.otf"),
   });
 
   if (!loaded) return null;

@@ -1,76 +1,36 @@
 // Содержимое главного экрана с полками: хранит книги/полки, открывает модальное окно и рисует список категорий.
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 import React, { useMemo, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import ShelvesSheet from "../ShelvesSheet";
-import type { Book, Shelf } from "../../shared/types";
+import {
+  getBooksForShelf,
+  initialShelves,
+  libraryBooks,
+} from "../../shared/libraryData";
+import type { Shelf } from "../../shared/types";
 import { HomeHeader } from "./HomeHeader";
 import { ShelfSection } from "./ShelfSection";
 
-// Временные локальные данные книг. Позже их можно будет заменить на данные из хранилища.
-const allBooks: Book[] = [
-  {
-    id: "1",
-    coverImage: require("../../assets/covers/cover1.png"),
-    shelfId: "fantasy",
-  },
-  {
-    id: "2",
-    coverImage: require("../../assets/covers/cover2.png"),
-    shelfId: "science",
-  },
-  {
-    id: "3",
-    coverImage: require("../../assets/covers/cover3.png"),
-    shelfId: "fantasy",
-  },
-  {
-    id: "4",
-    coverImage: require("../../assets/covers/cover4.png"),
-    shelfId: "recommended",
-  },
-  {
-    id: "5",
-    coverImage: require("../../assets/covers/cover5.jpg"),
-    shelfId: "science",
-  },
-  {
-    id: "6",
-    coverImage: require("../../assets/covers/cover6.jpg"),
-    shelfId: "recommended",
-  },
-];
-
 export function HomeContent() {
+  const router = useRouter();
+
   // Управляет видимостью нижнего окна редактирования полок.
   const [sheetVisible, setSheetVisible] = useState(false);
 
   // Хранит порядок, названия и признак закрепления полок.
-  const [shelves, setShelves] = useState<Shelf[]>([
-    { id: "recent", title: "Последние", locked: true },
-    { id: "all", title: "Все", locked: true },
-    { id: "fantasy", title: "Фантастика", locked: false },
-    { id: "science", title: "Научные", locked: false },
-    { id: "recommended", title: "Посоветовали", locked: false },
-  ]);
-
-  // Возвращает книги, которые относятся к конкретной полке.
-  const getBooksForShelf = (shelfId: string) => {
-    if (shelfId === "all") return allBooks;
-    if (shelfId === "recent") return allBooks.slice(0, 4);
-
-    return allBooks.filter((book) => book.shelfId === shelfId);
-  };
+  const [shelves, setShelves] = useState<Shelf[]>(initialShelves);
 
   // Возвращает количество книг на полке. Для "Последние" показываем максимум 4 книги.
   const getCountForShelf = (shelfId: string) => {
-    if (shelfId === "all") return allBooks.length;
-    if (shelfId === "recent") return Math.min(4, allBooks.length);
+    if (shelfId === "all") return libraryBooks.length;
+    if (shelfId === "recent") return Math.min(4, libraryBooks.length);
 
-    return allBooks.filter((book) => book.shelfId === shelfId).length;
+    return getBooksForShelf(shelfId).length;
   };
 
   // Оставляет на главном экране закрепленные полки и пользовательские полки, даже если они пустые.
@@ -116,6 +76,14 @@ export function HomeContent() {
     );
   };
 
+  // Открывает отдельный экран полки с книгами этой категории.
+  const handleOpenShelf = (shelf: Shelf) => {
+    router.push({
+      pathname: "/shelf/[id]",
+      params: { id: shelf.id, title: shelf.title },
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView
@@ -135,6 +103,7 @@ export function HomeContent() {
               books={books}
               bookCount={bookCount}
               index={index}
+              onPress={() => handleOpenShelf(shelf)}
             />
           );
         })}
