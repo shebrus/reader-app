@@ -1,17 +1,19 @@
 // Панель под шапкой: поле поиска и три переключателя будущих режимов отображения книг.
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
-const ACTIVE_VIEW = "list";
+const ACTIVE_VIEW = "grid";
 const ACTIVE_COLOR = "#7BBDFA";
 const INACTIVE_COLOR = "#898EA1";
-type ViewMode = "cover" | "list" | "grid";
+export type ViewMode = "cover" | "list" | "grid";
 
 type ShelfSearchModeBarProps = {
   activeView?: ViewMode;
+  onChangeView?: (view: ViewMode) => void;
 };
 
 export function ShelfSearchModeBar({
   activeView = ACTIVE_VIEW,
+  onChangeView,
 }: ShelfSearchModeBarProps) {
   const getModeTint = (mode: ViewMode) =>
     activeView === mode ? ACTIVE_COLOR : INACTIVE_COLOR;
@@ -27,20 +29,45 @@ export function ShelfSearchModeBar({
       </View>
 
       <View style={styles.modeButtons}>
-        <Image
+        <ModeIcon
+          mode="cover"
+          tintColor={getModeTint("cover")}
           source={require("../../assets/icons/view-cover-icon.png")}
-          style={[styles.modeIcon, { tintColor: getModeTint("cover") }]}
+          onPress={onChangeView}
         />
-        <Image
+        <ModeIcon
+          mode="list"
+          tintColor={getModeTint("list")}
           source={require("../../assets/icons/view-list-icon.png")}
-          style={[styles.modeIcon, { tintColor: getModeTint("list") }]}
+          onPress={onChangeView}
         />
-        <Image
+        <ModeIcon
+          mode="grid"
+          tintColor={getModeTint("grid")}
           source={require("../../assets/icons/view-grid-icon.png")}
-          style={[styles.modeIcon, { tintColor: getModeTint("grid") }]}
+          onPress={onChangeView}
         />
       </View>
     </View>
+  );
+}
+
+type ModeIconProps = {
+  mode: ViewMode;
+  source: number;
+  tintColor: string;
+  onPress?: (view: ViewMode) => void;
+};
+
+function ModeIcon({ mode, source, tintColor, onPress }: ModeIconProps) {
+  return (
+    <Pressable
+      accessibilityRole="button"
+      onPress={() => onPress?.(mode)}
+      style={styles.modeButton}
+    >
+      <Image source={source} style={[styles.modeIcon, { tintColor }]} />
+    </Pressable>
   );
 }
 
@@ -87,6 +114,13 @@ const styles = StyleSheet.create({
     height: 22,
     justifyContent: "flex-end",
     width: 96,
+  },
+
+  modeButton: {
+    alignItems: "center",
+    height: 32,
+    justifyContent: "center",
+    width: 24,
   },
 
   modeIcon: {
