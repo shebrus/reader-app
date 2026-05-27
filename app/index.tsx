@@ -6,6 +6,12 @@ import type { PanGestureHandlerStateChangeEvent } from "react-native-gesture-han
 
 import { HomeContent } from "../components/home/HomeContent";
 import { IntroScreen } from "../components/intro/IntroScreen";
+import { pickAndImportBook } from "../shared/importBook";
+import {
+  loadImportedBooks,
+  saveImportedBooks,
+} from "../shared/importedBooksStore";
+import type { Book } from "../shared/types";
 
 const OPEN_DISTANCE = 250;
 const OPEN_VELOCITY = -650;
@@ -14,12 +20,27 @@ export default function HomeScreen() {
   const { height } = useWindowDimensions();
   const [introCompleted, setIntroCompleted] = useState(false);
   const [carouselActive, setCarouselActive] = useState(false);
+  const [books, setBooks] = useState<Book[]>([]);
+  const [introBookToOpen, setIntroBookToOpen] = useState<Book | null>(null);
 
   // Основная позиция всей вертикальной страницы: 0 - стартовый экран, -height - экран категорий.
   const baseTranslateY = useRef(new Animated.Value(0)).current;
 
   // Временное смещение пальцем во время свайпа.
   const dragTranslateY = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    loadImportedBooks().then((importedBooks) => {
+      if (cancelled) return;
+      setBooks(importedBooks);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // При изменении высоты экрана держим страницу в правильной позиции.
   useEffect(() => {
@@ -76,6 +97,23 @@ export default function HomeScreen() {
     }).start();
   };
 
+  const handleImportBook = async (shelfId: string) => {
+    const importedBook = await pickAndImportBook(shelfId);
+
+    if (!importedBook) return;
+
+    setBooks((currentBooks) => {
+      const nextBooks = [importedBook, ...currentBooks];
+      saveImportedBooks(nextBooks.filter((book) => book.importedAt));
+      return nextBooks;
+    });
+  };
+
+  const handleIntroBookPress = (book: Book) => {
+    setIntroBookToOpen(book);
+    setIntroCompleted(true);
+  };
+
   return (
     <PanGestureHandler
       enabled={!introCompleted && !carouselActive}
@@ -93,11 +131,19 @@ export default function HomeScreen() {
           ]}
         >
           <View style={[styles.screen, { height }]}>
-            <IntroScreen onCarouselActiveChange={setCarouselActive} />
+            <IntroScreen
+              books={books}
+              onBookPress={handleIntroBookPress}
+              onCarouselActiveChange={setCarouselActive}
+            />
           </View>
 
           <View style={[styles.screen, { height }]}>
-            <HomeContent />
+            <HomeContent
+              books={books}
+              bookToOpen={introBookToOpen}
+              onImportBook={handleImportBook}
+            />
           </View>
         </Animated.View>
       </Animated.View>

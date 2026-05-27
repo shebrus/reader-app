@@ -16,7 +16,9 @@ export type RotateDirection = "left" | "right";
 
 export type IntroBook = {
   id: string;
-  coverImage: ImageSourcePropType;
+  coverColor?: string;
+  coverImage?: ImageSourcePropType;
+  sourceBookId?: string;
 };
 
 export type Frame = {

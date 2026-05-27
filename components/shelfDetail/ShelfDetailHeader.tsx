@@ -4,11 +4,13 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 type ShelfDetailHeaderProps = {
   title: string;
   onBackPress: () => void;
+  onAddPress?: () => void;
 };
 
 export function ShelfDetailHeader({
   title,
   onBackPress,
+  onAddPress,
 }: ShelfDetailHeaderProps) {
   return (
     <View style={styles.header}>
@@ -27,7 +29,11 @@ export function ShelfDetailHeader({
         {title}
       </Text>
 
-      <Pressable accessibilityRole="button" style={styles.iconButton}>
+      <Pressable
+        accessibilityRole="button"
+        onPress={onAddPress}
+        style={styles.iconButton}
+      >
         <Image
           source={require("../../assets/icons/plus-icon.png")}
           style={styles.plusIcon}

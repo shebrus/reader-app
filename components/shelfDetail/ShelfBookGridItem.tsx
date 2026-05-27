@@ -1,5 +1,6 @@
 // Карточка книги для режима сетки: компактная обложка, подписи, прогресс и иконки форматов.
-import { Image, StyleSheet, Text, View } from "react-native";
+import { memo } from "react";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { BookCardNew } from "../BookCardNew";
 import type { Book } from "../../shared/types";
@@ -8,17 +9,23 @@ const BOOK_WIDTH = 108;
 
 type ShelfBookGridItemProps = {
   book: Book;
+  onPress?: (book: Book) => void;
 };
 
-export function ShelfBookGridItem({ book }: ShelfBookGridItemProps) {
+function ShelfBookGridItemComponent({ book, onPress }: ShelfBookGridItemProps) {
   const progress = getBookProgress(book);
   const isBookUnavailable = book.id === "3";
   const isAudioUnavailable = book.id === "4";
 
   return (
-    <View style={styles.card}>
+    <Pressable
+      disabled={!book.importedAt || !onPress}
+      onPress={() => onPress?.(book)}
+      style={styles.card}
+    >
       <BookCardNew
         coverImage={book.coverImage}
+        coverColor={book.coverColor}
         width={BOOK_WIDTH}
         style={styles.cover}
       />
@@ -74,9 +81,11 @@ export function ShelfBookGridItem({ book }: ShelfBookGridItemProps) {
           />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
+
+export const ShelfBookGridItem = memo(ShelfBookGridItemComponent);
 
 function getBookProgress(book: Book) {
   if (book.totalPages <= 0) return 0;

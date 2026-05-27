@@ -1,5 +1,6 @@
 // Строка книги в режиме списка: обложка, название, автор, прогресс чтения и иконки форматов.
-import { Image, StyleSheet, Text, View } from "react-native";
+import { memo } from "react";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { BookCardNew } from "../BookCardNew";
 import type { Book } from "../../shared/types";
@@ -8,16 +9,22 @@ const BOOK_WIDTH = 108;
 
 type ShelfBookListItemProps = {
   book: Book;
+  onPress?: (book: Book) => void;
 };
 
-export function ShelfBookListItem({ book }: ShelfBookListItemProps) {
+function ShelfBookListItemComponent({ book, onPress }: ShelfBookListItemProps) {
   const progress = getBookProgress(book);
   const isBookUnavailable = book.id === "3";
 
   return (
-    <View style={styles.item}>
+    <Pressable
+      disabled={!book.importedAt || !onPress}
+      onPress={() => onPress?.(book)}
+      style={styles.item}
+    >
       <BookCardNew
         coverImage={book.coverImage}
+        coverColor={book.coverColor}
         width={BOOK_WIDTH}
         style={styles.cover}
       />
@@ -70,9 +77,11 @@ export function ShelfBookListItem({ book }: ShelfBookListItemProps) {
           />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
+
+export const ShelfBookListItem = memo(ShelfBookListItemComponent);
 
 function getBookProgress(book: Book) {
   if (book.totalPages <= 0) return 0;

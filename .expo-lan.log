@@ -1,0 +1,9 @@
+
+> reader-app@1.0.0 start:lan
+> node ./scripts/expo-start.js --lan --port 8082
+
+Starting project at D:\reader-app-master2\reader-app-master
+React Compiler enabled
+Starting Metro Bundler
+Waiting on http://localhost:8082
+Logs for your project will appear below.

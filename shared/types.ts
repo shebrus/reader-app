@@ -3,13 +3,20 @@ import type { ImageSourcePropType } from "react-native";
 
 export type Book = {
   id: string;
-  coverImage: ImageSourcePropType;
+  coverImage?: ImageSourcePropType;
+  coverColor?: string;
   shelfId: string;
   shelfIds?: string[];
   title: string;
   author: string;
   pagesRead: number;
   totalPages: number;
+  fileUri?: string;
+  fileName?: string;
+  fileFormat?: "epub" | "fb2" | "txt" | "pdf";
+  fileSize?: number;
+  importedAt?: number;
+  notesCount?: number;
 };
 
 export type Shelf = {

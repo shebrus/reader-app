@@ -1,5 +1,5 @@
 // Рисует 3D-карточку книги из слоев обложки, страниц, бликов и теней.
-import { useId } from "react";
+import { memo, useId } from "react";
 import { Image as ExpoImage } from "expo-image";
 import { View } from "react-native";
 
@@ -33,15 +33,27 @@ import { CoverLayer, SvgLayer } from "./bookCard/layers";
 import { styles } from "./bookCard/styles";
 import type { BookCardNewProps, LayerFrame } from "./bookCard/types";
 
-const BookCardNew = ({
-  coverImage,
-  width = DEFAULT_BOOK_WIDTH,
-  style,
-}: BookCardNewProps) => {
-  const clipIdBase = useId().replace(/:/g, "_");
-  const scale = width / BOOK_WIDTH;
+type BookLayout = {
+  backCoverGroupFrame: LayerFrame;
+  bookFrame: Pick<LayerFrame, "height" | "width">;
+  coverFrame: LayerFrame;
+  frontCoverGroupFrame: LayerFrame;
+  leftShadowFrame: LayerFrame;
+  leftShadow2Frame: LayerFrame;
+  pagesFrame: LayerFrame;
+  rightShadowFrame: LayerFrame;
+  upShadowFrame: LayerFrame;
+};
 
-  const layerStyle = (
+const bookLayoutCache = new Map<number, BookLayout>();
+
+function getBookLayout(width: number) {
+  const cachedLayout = bookLayoutCache.get(width);
+
+  if (cachedLayout) return cachedLayout;
+
+  const scale = width / BOOK_WIDTH;
+  const layerFrame = (
     left: number,
     top: number,
     layerWidth: number,
@@ -53,69 +65,110 @@ const BookCardNew = ({
     width: layerWidth * scale,
   });
 
-  const coverFrame = layerStyle(0, 0, COVER_WIDTH, COVER_HEIGHT);
+  const layout: BookLayout = {
+    backCoverGroupFrame: layerFrame(
+      0,
+      0,
+      BACK_COVER_GROUP_WIDTH,
+      BACK_COVER_GROUP_HEIGHT,
+    ),
+    bookFrame: {
+      height: BOOK_HEIGHT * scale,
+      width: BOOK_WIDTH * scale,
+    },
+    coverFrame: layerFrame(0, 0, COVER_WIDTH, COVER_HEIGHT),
+    frontCoverGroupFrame: layerFrame(
+      0,
+      FRONT_COVER_GROUP_TOP,
+      FRONT_COVER_GROUP_WIDTH,
+      FRONT_COVER_GROUP_HEIGHT,
+    ),
+    leftShadowFrame: layerFrame(
+      0,
+      SIDE_SHADOW_TOP,
+      SIDE_SHADOW_WIDTH,
+      SIDE_SHADOW_HEIGHT,
+    ),
+    leftShadow2Frame: layerFrame(
+      LEFT_SHADOW_2_LEFT,
+      0,
+      LEFT_SHADOW_2_WIDTH,
+      LEFT_SHADOW_2_HEIGHT,
+    ),
+    pagesFrame: layerFrame(PAGES_LEFT, PAGES_TOP, PAGES_WIDTH, PAGES_HEIGHT),
+    rightShadowFrame: layerFrame(
+      RIGHT_SHADOW_LEFT,
+      SIDE_SHADOW_TOP,
+      SIDE_SHADOW_WIDTH,
+      SIDE_SHADOW_HEIGHT,
+    ),
+    upShadowFrame: layerFrame(0, 0, UP_SHADOW_WIDTH, UP_SHADOW_HEIGHT),
+  };
+
+  bookLayoutCache.set(width, layout);
+  return layout;
+}
+
+const BookCardNew = ({
+  coverImage,
+  coverColor,
+  width = DEFAULT_BOOK_WIDTH,
+  style,
+}: BookCardNewProps) => {
+  const clipIdBase = useId().replace(/:/g, "_");
+  const {
+    backCoverGroupFrame,
+    bookFrame,
+    coverFrame,
+    frontCoverGroupFrame,
+    leftShadowFrame,
+    leftShadow2Frame,
+    pagesFrame,
+    rightShadowFrame,
+    upShadowFrame,
+  } = getBookLayout(width);
 
   return (
     <View
       style={[
         styles.book,
-        {
-          height: BOOK_HEIGHT * scale,
-          width: BOOK_WIDTH * scale,
-        },
+        bookFrame,
         style,
       ]}
     >
       <View
         style={[
           styles.group,
-          layerStyle(0, 0, BACK_COVER_GROUP_WIDTH, BACK_COVER_GROUP_HEIGHT),
+          backCoverGroupFrame,
         ]}
       >
         <CoverLayer
           coverImage={coverImage}
+          coverColor={coverColor}
           source={bookAssets.backCover}
           style={coverFrame}
           clipId={`${clipIdBase}-back-cover`}
           shape="back"
         />
         <SvgLayer source={bookAssets.blur2} style={coverFrame} />
-        <SvgLayer
-          source={bookAssets.rightShadow2}
-          style={layerStyle(
-            RIGHT_SHADOW_LEFT,
-            SIDE_SHADOW_TOP,
-            SIDE_SHADOW_WIDTH,
-            SIDE_SHADOW_HEIGHT,
-          )}
-        />
-        <SvgLayer
-          source={bookAssets.upShadow}
-          style={layerStyle(0, 0, UP_SHADOW_WIDTH, UP_SHADOW_HEIGHT)}
-        />
+        <SvgLayer source={bookAssets.rightShadow2} style={rightShadowFrame} />
+        <SvgLayer source={bookAssets.upShadow} style={upShadowFrame} />
         <ExpoImage
           source={bookAssets.pages}
           contentFit="fill"
-          style={[
-            styles.layer,
-            layerStyle(PAGES_LEFT, PAGES_TOP, PAGES_WIDTH, PAGES_HEIGHT),
-          ]}
+          style={[styles.layer, pagesFrame]}
         />
       </View>
 
       <View
         style={[
           styles.group,
-          layerStyle(
-            0,
-            FRONT_COVER_GROUP_TOP,
-            FRONT_COVER_GROUP_WIDTH,
-            FRONT_COVER_GROUP_HEIGHT,
-          ),
+          frontCoverGroupFrame,
         ]}
       >
         <CoverLayer
           coverImage={coverImage}
+          coverColor={coverColor}
           source={bookAssets.frontCover}
           style={coverFrame}
           clipId={`${clipIdBase}-front-cover`}
@@ -124,38 +177,16 @@ const BookCardNew = ({
         <SvgLayer source={bookAssets.blur1} style={coverFrame} />
 
         <View style={[styles.group, coverFrame]}>
-          <SvgLayer
-            source={bookAssets.rightShadow1}
-            style={layerStyle(
-              RIGHT_SHADOW_LEFT,
-              SIDE_SHADOW_TOP,
-              SIDE_SHADOW_WIDTH,
-              SIDE_SHADOW_HEIGHT,
-            )}
-          />
-          <SvgLayer
-            source={bookAssets.leftShadow2}
-            style={layerStyle(
-              LEFT_SHADOW_2_LEFT,
-              0,
-              LEFT_SHADOW_2_WIDTH,
-              LEFT_SHADOW_2_HEIGHT,
-            )}
-          />
-          <SvgLayer
-            source={bookAssets.leftShadow}
-            style={layerStyle(
-              0,
-              SIDE_SHADOW_TOP,
-              SIDE_SHADOW_WIDTH,
-              SIDE_SHADOW_HEIGHT,
-            )}
-          />
+          <SvgLayer source={bookAssets.rightShadow1} style={rightShadowFrame} />
+          <SvgLayer source={bookAssets.leftShadow2} style={leftShadow2Frame} />
+          <SvgLayer source={bookAssets.leftShadow} style={leftShadowFrame} />
         </View>
       </View>
     </View>
   );
 };
 
-export { BookCardNew };
-export default BookCardNew;
+const MemoizedBookCardNew = memo(BookCardNew);
+
+export { MemoizedBookCardNew as BookCardNew };
+export default MemoizedBookCardNew;

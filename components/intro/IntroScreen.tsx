@@ -5,12 +5,19 @@ import { Animated, StyleSheet, useWindowDimensions, View } from "react-native";
 import { IntroBookCarousel } from "./IntroBookCarousel";
 import { IntroTitle } from "./IntroTitle";
 import { DESIGN_HEIGHT, DESIGN_WIDTH } from "./introLayout";
+import type { Book } from "../../shared/types";
 
 type IntroScreenProps = {
+  books: Book[];
   onCarouselActiveChange?: (active: boolean) => void;
+  onBookPress?: (book: Book) => void;
 };
 
-export function IntroScreen({ onCarouselActiveChange }: IntroScreenProps) {
+export function IntroScreen({
+  books,
+  onBookPress,
+  onCarouselActiveChange,
+}: IntroScreenProps) {
   const { width, height } = useWindowDimensions();
   const [carouselActive, setCarouselActive] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
@@ -50,10 +57,12 @@ export function IntroScreen({ onCarouselActiveChange }: IntroScreenProps) {
       />
 
       <IntroBookCarousel
+        libraryBooks={books}
         canvasLeft={canvasLeft}
         carouselActive={carouselActive}
         isRotating={isRotating}
         onActiveChange={setCarouselActive}
+        onBookPress={onBookPress}
         onRotatingChange={setIsRotating}
         progress={progress}
         scale={scale}

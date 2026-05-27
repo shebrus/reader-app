@@ -1,0 +1,7 @@
+
+> reader-app@1.0.0 start:local
+> node ./scripts/expo-start.js --localhost --clear
+
+Starting project at D:\reader-app-master2\reader-app-master
+› Port 8081 is being used by another process
+› Skipping dev server

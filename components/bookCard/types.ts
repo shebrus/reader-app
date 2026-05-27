@@ -3,6 +3,7 @@ import type { ImageSourcePropType, StyleProp, ViewStyle } from "react-native";
 
 export type BookCardNewProps = {
   coverImage?: ImageSourcePropType | string;
+  coverColor?: string;
   width?: number;
   style?: StyleProp<ViewStyle>;
 };
@@ -21,6 +22,7 @@ export type SvgLayerProps = {
 
 export type CoverLayerProps = {
   coverImage?: ImageSourcePropType | string;
+  coverColor?: string;
   source: ImageSourcePropType;
   style: LayerFrame;
   clipId: string;

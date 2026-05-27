@@ -1,5 +1,5 @@
 // Карусель книг на стартовом экране: раскрывает стопку, закрывает ее и меняет центральную книгу свайпом.
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Animated,
   Pressable,
@@ -22,16 +22,18 @@ import {
   carouselFrames,
   getNextSlot,
   initialFrames,
-  introBooks,
   slotNames,
 } from "./introLayout";
-import type { RotateDirection } from "./introLayout";
+import type { IntroBook, RotateDirection } from "./introLayout";
+import type { Book } from "../../shared/types";
 
 type IntroBookCarouselProps = {
+  libraryBooks: Book[];
   canvasLeft: number;
   carouselActive: boolean;
   isRotating: boolean;
   onActiveChange: (active: boolean) => void;
+  onBookPress?: (book: Book) => void;
   onRotatingChange: (rotating: boolean) => void;
   progress: Animated.Value;
   scale: number;
@@ -39,21 +41,31 @@ type IntroBookCarouselProps = {
 };
 
 export function IntroBookCarousel({
+  libraryBooks,
   canvasLeft,
   carouselActive,
   isRotating,
   onActiveChange,
+  onBookPress,
   onRotatingChange,
   progress,
   scale,
   width,
 }: IntroBookCarouselProps) {
-  const [books, setBooks] = useState(introBooks);
+  const introBooks = useMemo(
+    () => buildIntroBooks(libraryBooks),
+    [libraryBooks],
+  );
+  const [books, setBooks] = useState<IntroBook[]>(introBooks);
   const [rotationDirection, setRotationDirection] =
     useState<RotateDirection | null>(null);
 
   const dragX = useRef(new Animated.Value(0)).current;
   const rotationProgress = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    setBooks(introBooks);
+  }, [introBooks]);
 
   useEffect(() => {
     if (!carouselActive) {
@@ -127,6 +139,17 @@ export function IntroBookCarousel({
     }
 
     openCarousel();
+  };
+
+  const handleBookPress = (introBook: IntroBook) => {
+    if (!carouselActive || isRotating || !introBook.sourceBookId) return;
+
+    const sourceBook = libraryBooks.find(
+      (book) => book.id === introBook.sourceBookId,
+    );
+    if (!sourceBook) return;
+
+    onBookPress?.(sourceBook);
   };
 
   const handleCarouselGesture = Animated.event(
@@ -282,14 +305,24 @@ export function IntroBookCarousel({
           {introBooks.map((book) => {
             const bookIndex = books.findIndex((item) => item.id === book.id);
             const baseWidth = BASE_BOOK_WIDTH * scale;
+            const styleIndex = bookIndex >= 0 ? bookIndex : 0;
 
             return (
               <Animated.View
                 key={book.id}
                 onStartShouldSetResponder={() => true}
-                style={[styles.book, getBookStyle(bookIndex)]}
+                style={[styles.book, getBookStyle(styleIndex)]}
               >
-                <BookCardNew coverImage={book.coverImage} width={baseWidth} />
+                <Pressable
+                  disabled={!book.sourceBookId || !onBookPress}
+                  onPress={() => handleBookPress(book)}
+                >
+                  <BookCardNew
+                    coverColor={book.coverColor}
+                    coverImage={book.coverImage}
+                    width={baseWidth}
+                  />
+                </Pressable>
               </Animated.View>
             );
           })}
@@ -297,6 +330,28 @@ export function IntroBookCarousel({
       </Animated.View>
     </PanGestureHandler>
   );
+}
+
+function buildIntroBooks(libraryBooks: Book[]): IntroBook[] {
+  const importedBooks: IntroBook[] = libraryBooks
+    .filter((book) => book.importedAt)
+    .sort((first, second) => (second.importedAt ?? 0) - (first.importedAt ?? 0))
+    .slice(0, 3)
+    .map((book) => ({
+      id: book.id,
+      coverColor: book.coverColor,
+      coverImage: book.coverImage,
+      sourceBookId: book.id,
+    }));
+
+  while (importedBooks.length < 3) {
+    importedBooks.push({
+      id: `intro-placeholder-${importedBooks.length}`,
+      coverColor: "#DFF1FF",
+    });
+  }
+
+  return importedBooks;
 }
 
 const styles = StyleSheet.create({

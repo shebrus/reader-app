@@ -20,12 +20,13 @@ import { styles } from "./styles";
 
 export const CoverLayer = ({
   coverImage,
+  coverColor,
   source,
   style,
   clipId,
   shape,
 }: CoverLayerProps) => {
-  if (!coverImage) {
+  if (!coverImage && !coverColor) {
     return <SvgLayer source={source} style={style} />;
   }
 
@@ -47,12 +48,20 @@ export const CoverLayer = ({
         </ClipPath>
       </Defs>
       <G clipPath={`url(#${clipId})`}>
-        <SvgImage
-          width={COVER_WIDTH}
-          height={COVER_HEIGHT}
-          href={coverImage}
-          preserveAspectRatio="xMidYMid slice"
-        />
+        {coverImage ? (
+          <SvgImage
+            width={COVER_WIDTH}
+            height={COVER_HEIGHT}
+            href={coverImage}
+            preserveAspectRatio="xMidYMid slice"
+          />
+        ) : (
+          <Rect
+            width={COVER_WIDTH}
+            height={COVER_HEIGHT}
+            fill={coverColor}
+          />
+        )}
       </G>
     </Svg>
   );

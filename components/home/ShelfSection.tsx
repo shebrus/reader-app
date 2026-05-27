@@ -1,4 +1,5 @@
 // Одна секция полки: название, количество книг, горизонтальный список книг, синяя плашка и открытие экрана полки.
+import { memo } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { BookCardNew } from "../BookCardNew";
@@ -17,14 +18,16 @@ type ShelfSectionProps = {
   books: Book[];
   bookCount: number;
   index: number;
+  onBookPress?: (book: Book) => void;
   onPress?: () => void;
 };
 
-export function ShelfSection({
+function ShelfSectionComponent({
   shelf,
   books,
   bookCount,
   index,
+  onBookPress,
   onPress,
 }: ShelfSectionProps) {
   return (
@@ -48,12 +51,18 @@ export function ShelfSection({
         contentContainerStyle={styles.booksScroll}
       >
         {books.map((book) => (
-          <BookCardNew
+          <Pressable
             key={book.id}
-            coverImage={book.coverImage}
-            width={HOME_BOOK_WIDTH}
+            disabled={!book.importedAt || !onBookPress}
+            onPress={() => onBookPress?.(book)}
             style={styles.bookCard}
-          />
+          >
+            <BookCardNew
+              coverImage={book.coverImage}
+              coverColor={book.coverColor}
+              width={HOME_BOOK_WIDTH}
+            />
+          </Pressable>
         ))}
       </ScrollView>
 
@@ -61,6 +70,8 @@ export function ShelfSection({
     </View>
   );
 }
+
+export const ShelfSection = memo(ShelfSectionComponent);
 
 const styles = StyleSheet.create({
   shelfWrapper: {
