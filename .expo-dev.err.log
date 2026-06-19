@@ -1,0 +1,16 @@
+D:\reader-app-master5\reader-app-master\node_modules\expo\node_modules\@expo\cli\build\src\utils\errors.js:130
+    throw error;
+    ^
+
+Error: EPERM: operation not permitted, open 'D:\reader-app-master5\reader-app-master\expo-env.d.ts'
+    at open (node:internal/fs/promises:640:25)
+    at Object.writeFile (node:internal/fs/promises:1253:14)
+    at async Promise.all (index 1)
+    at startTypescriptTypeGenerationAsync (D:\reader-app-master5\reader-app-master\node_modules\expo\node_modules\@expo\cli\src\start\server\type-generation\startTypescriptTypeGeneration.ts:45:5) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: 'D:\\reader-app-master5\\reader-app-master\\expo-env.d.ts'
+}
+
+Node.js v24.14.1

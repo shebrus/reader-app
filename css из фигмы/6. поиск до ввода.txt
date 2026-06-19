@@ -1,0 +1,161 @@
+/* 12c / 15g / 10m */
+
+position: relative;
+width: 375px;
+height: 812px;
+left: 5122px;
+top: 4550px;
+
+background: #1C1C1E;
+border-radius: 50px;
+
+
+/* 48 c. До конца главы */
+
+position: absolute;
+width: 164px;
+height: 19px;
+left: 106px;
+top: 65px;
+
+font-family: 'SF Pro';
+font-style: normal;
+font-weight: 274;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #4B4B4B;
+
+
+
+/* Frame 2131330125 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+padding: 12px;
+gap: 16px;
+
+position: absolute;
+width: 375px;
+height: 696px;
+left: 0px;
+top: 116px;
+
+background: #252525;
+border-radius: 24px;
+
+
+/* Frame 2131330124 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+width: 351px;
+height: 36px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 2131330000 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 5px 6px;
+gap: 12px;
+
+width: 303px;
+height: 36px;
+
+background: #FFFFFF;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* tabler:search */
+
+width: 26px;
+height: 26px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+border: 2px solid #9C9C9C;
+
+
+/* Поиск */
+
+width: 46px;
+height: 24px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height */
+
+color: #192024;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* fluent:checkmark-12-regular */
+
+width: 36px;
+height: 36px;
+
+background: rgba(229, 66, 66, 0.1);
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* krest_read */
+
+position: absolute;
+height: 16px;
+left: 27.78%;
+right: 27.78%;
+top: calc(50% - 16px/2);
+
+background: #FF9F9F;

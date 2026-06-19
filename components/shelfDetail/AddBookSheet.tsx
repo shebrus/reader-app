@@ -1,5 +1,6 @@
 import { BlurView } from "expo-blur";
 import { Image as ExpoImage } from "expo-image";
+import { useEffect, useState } from "react";
 import {
   Modal,
   Pressable,
@@ -12,6 +13,9 @@ import {
 const arrowLeftIcon = require("../../assets/icons/arrow_left.svg");
 const arrowRightIcon = require("../../assets/icons/arrow_right.svg");
 const downloadBookIcon = require("../../assets/icons/download_book.svg");
+const downloadAudioIcon = require("../../assets/icons/download_audio.svg");
+
+type AddBookSheetMode = "book" | "audio";
 
 const DESIGN_WIDTH = 375;
 const SHEET_HEIGHT = 363;
@@ -21,21 +25,38 @@ type AddBookSheetProps = {
   visible: boolean;
   onClose: () => void;
   onImportBook?: () => Promise<void>;
+  onImportAudioBook?: () => Promise<void>;
 };
 
 export function AddBookSheet({
   visible,
   onClose,
   onImportBook,
+  onImportAudioBook,
 }: AddBookSheetProps) {
   const { width } = useWindowDimensions();
   const scale = width / DESIGN_WIDTH;
   const contentWidth = Math.max(width - SIDE_PADDING * 2, 0);
+  const [mode, setMode] = useState<AddBookSheetMode>("book");
+
+  useEffect(() => {
+    if (visible) {
+      setMode("book");
+    }
+  }, [visible]);
 
   const handleImportPress = async () => {
-    await onImportBook?.();
+    if (mode === "book") {
+      await onImportBook?.();
+    } else {
+      await onImportAudioBook?.();
+    }
+
     onClose();
   };
+
+  const showAudioMode = () => setMode("audio");
+  const showBookMode = () => setMode("book");
 
   return (
     <Modal
@@ -117,14 +138,23 @@ export function AddBookSheet({
                   },
                 ]}
               >
-                <ExpoImage
-                  source={arrowLeftIcon}
-                  contentFit="contain"
-                  style={{ height: 24 * scale, width: 24 * scale }}
-                />
+                <Pressable
+                  accessibilityRole="button"
+                  disabled={mode === "book"}
+                  onPress={showBookMode}
+                  style={styles.arrowPressable}
+                >
+                  <ExpoImage
+                    source={arrowLeftIcon}
+                    contentFit="contain"
+                    style={{ height: 24 * scale, width: 24 * scale }}
+                  />
+                </Pressable>
               </View>
 
-              <View
+              <Pressable
+                accessibilityRole="button"
+                onPress={handleImportPress}
                 style={[
                   styles.actionCard,
                   {
@@ -136,15 +166,22 @@ export function AddBookSheet({
                 ]}
               >
                 <ExpoImage
-                  source={downloadBookIcon}
+                  source={mode === "book" ? downloadBookIcon : downloadAudioIcon}
                   contentFit="contain"
                   cachePolicy="memory-disk"
-                  style={{
-                    height: 92 * scale,
-                    width: 72 * scale,
-                  }}
+                  style={
+                    mode === "book"
+                      ? {
+                          height: 92 * scale,
+                          width: 72 * scale,
+                        }
+                      : {
+                          height: 72 * scale,
+                          width: 72 * scale,
+                        }
+                  }
                 />
-              </View>
+              </Pressable>
 
               <View
                 style={[
@@ -157,11 +194,18 @@ export function AddBookSheet({
                   },
                 ]}
               >
-                <ExpoImage
-                  source={arrowRightIcon}
-                  contentFit="contain"
-                  style={{ height: 24 * scale, width: 24 * scale }}
-                />
+                <Pressable
+                  accessibilityRole="button"
+                  disabled={mode === "audio"}
+                  onPress={showAudioMode}
+                  style={styles.arrowPressable}
+                >
+                  <ExpoImage
+                    source={arrowRightIcon}
+                    contentFit="contain"
+                    style={{ height: 24 * scale, width: 24 * scale }}
+                  />
+                </Pressable>
               </View>
             </View>
 
@@ -187,7 +231,7 @@ export function AddBookSheet({
                   },
                 ]}
               >
-                Загрузить книгу
+                {mode === "book" ? "Загрузить книгу" : "Загрузить аудио"}
               </Text>
             </Pressable>
           </View>
@@ -244,6 +288,11 @@ const styles = StyleSheet.create({
   arrowButton: {
     alignItems: "center",
     backgroundColor: "rgba(0, 132, 255, 0.1)",
+    justifyContent: "center",
+  },
+
+  arrowPressable: {
+    alignItems: "center",
     justifyContent: "center",
   },
 

@@ -1,0 +1,154 @@
+/* 12c / 15g / 10m */
+
+position: relative;
+width: 375px;
+height: 812px;
+left: 2026px;
+top: 4869px;
+
+background: #1C1C1E;
+border-radius: 50px;
+
+
+/* Frame 2131330101 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 322px;
+height: 639px;
+left: 27px;
+top: 97px;
+
+
+
+/* Стрелки на старинных часах приближались к полуночи. Через пятнадцать минут закончится старый год и в свои права вступит новый — начнется Ночь зимнего свершения. Время чудес, перемен и любви. Только я встречу праздник не на Зимнем балу, как остальные адепты академии Эверлейн, который сейчас наверняка прекратили танцевать и сидят за столами с бокалами в руках. Я встречу его в кабинете ректора. А вместо подарка — исключение. У ректора я находилась в первый и, наверное, последний раз в своей жизни. В полном одиночестве. С растрепанными волосами, в порванном платье и с одной туфлей. С пылающим от гнева лицом и дрожащими от страха пальцами. Четыре старшекурсницы заманили меня в укромное местечко в замке и решили избить. Преподать урок «зазнавшейся мерзавке», как сказала одна из них. Мне то есть. Но несмотря ни на что, я старалась держаться достойно. Может быть, уровень моей магической силы не так высок, а семья не знатна и не богата, но я не собираюсь ни перед кем унижаться, юлить и вымаливать прощение. Личный секретарь ректора велел мне сесть в одно из кресел из мягчайшей эверской кожи и ждать. Но я встала у огромного, во весь пол, окна, скрестила руки на груди и стала осматриваться. Кабинет был празднично украшен: на окнах сияли серебристые огоньки, над камином парили тонкие свечи с радужным пламенем, на двери висел замысловатый венок, а рядом со столом высилась нарядная ель с пышными ветвями, украшенными живыми игрушками — в больших стеклянных шарах шел снег, летали крохотные пегасы, катались на катке дети… Каждый шар был удивительным, наверняка работа лучших артефакторов. Видимо, и ректору было не чуждо праздничное настроение, несмотря на всю его суровость и мрачность. Только даже его выдернули с праздничного застолья. Сейчас он придет в свой кабинет, злой, как триста тысяч оборотней, и меня выгонят из академии, а то и вовсе могут заключить под стражу. Позорище… */
+
+width: 322px;
+height: 1564px;
+
+font-family: 'Georgia';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #E0E0E0;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* 48 c. До конца главы */
+
+position: absolute;
+width: 164px;
+height: 19px;
+left: 106px;
+top: 65px;
+
+font-family: 'SF Pro';
+font-style: normal;
+font-weight: 274;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #4B4B4B;
+
+
+
+/* fluent:checkmark-12-regular */
+
+position: absolute;
+width: 36px;
+height: 36px;
+left: 313px;
+top: 57px;
+
+background: rgba(229, 66, 66, 0.1);
+border-radius: 10px;
+
+
+/* krest_read */
+
+position: absolute;
+height: 16px;
+left: 27.78%;
+right: 27.78%;
+top: calc(50% - 16px/2);
+
+background: #FF9F9F;
+
+
+/* Frame 2131330130 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-end;
+padding: 0px;
+gap: 93px;
+
+position: absolute;
+width: 193px;
+height: 36px;
+left: 156px;
+top: 739px;
+
+
+
+/* 1 из 346 */
+
+width: 64px;
+height: 19px;
+
+font-family: 'SF Pro';
+font-style: normal;
+font-weight: 274;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #4E4E4E;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 2131330103 */
+
+width: 36px;
+height: 36px;
+
+background: #878787;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* menu_read */
+
+position: absolute;
+width: 20px;
+height: 14px;
+left: 8px;
+top: 11px;
+
+background: #E6F3FF;

@@ -1,0 +1,593 @@
+/* 12c / 15g / 10m */
+
+position: relative;
+width: 375px;
+height: 812px;
+left: 2420px;
+top: 4750px;
+
+background: #1C1C1E;
+border-radius: 50px;
+
+
+/* Frame 2131330101 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 322px;
+height: 626px;
+left: 27px;
+top: 97px;
+
+
+
+/* Стрелки на старинных часах приближались к полуночи. Через пятнадцать минут закончится старый год и в свои права вступит новый — начнется Ночь зимнего свершения. Время чудес, перемен и любви. Только я встречу праздник не на Зимнем балу, как остальные адепты академии Эверлейн, который сейчас наверняка прекратили танцевать и сидят за столами с бокалами в руках. Я встречу его в кабинете ректора. А вместо подарка — исключение. У ректора я находилась в первый и, наверное, последний раз в своей жизни. В полном одиночестве. С растрепанными волосами, в порванном платье и с одной туфлей. С пылающим от гнева лицом и дрожащими от страха пальцами. Четыре старшекурсницы заманили меня в укромное местечко в замке и решили избить. Преподать урок «зазнавшейся мерзавке», как сказала одна из них. Мне то есть. Но несмотря ни на что, я старалась держаться достойно. Может быть, уровень моей магической силы не так высок, а семья не знатна и не богата, но я не собираюсь ни перед кем унижаться, юлить и вымаливать прощение. Личный секретарь ректора велел мне сесть в одно из кресел из мягчайшей эверской кожи и ждать. Но я встала у огромного, во весь пол, окна, скрестила руки на груди и стала осматриваться. Кабинет был празднично украшен: на окнах сияли серебристые огоньки, над камином парили тонкие свечи с радужным пламенем, на двери висел замысловатый венок, а рядом со столом высилась нарядная ель с пышными ветвями, украшенными живыми игрушками — в больших стеклянных шарах шел снег, летали крохотные пегасы, катались на катке дети… Каждый шар был удивительным, наверняка работа лучших артефакторов. Видимо, и ректору было не чуждо праздничное настроение, несмотря на всю его суровость и мрачность. Только даже его выдернули с праздничного застолья. Сейчас он придет в свой кабинет, злой, как триста тысяч оборотней, и меня выгонят из академии, а то и вовсе могут заключить под стражу. Позорище… */
+
+width: 322px;
+height: 1564px;
+
+font-family: 'Georgia';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #E0E0E0;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* 1 из 346 */
+
+position: absolute;
+width: 64px;
+height: 19px;
+left: 156px;
+top: 756px;
+
+font-family: 'SF Pro';
+font-style: normal;
+font-weight: 274;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #4E4E4E;
+
+
+
+/* 48 c. До конца главы */
+
+position: absolute;
+width: 164px;
+height: 19px;
+left: 106px;
+top: 65px;
+
+font-family: 'SF Pro';
+font-style: normal;
+font-weight: 274;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #4B4B4B;
+
+
+
+/* Frame 2131330112 */
+
+position: absolute;
+width: 36px;
+height: 36px;
+left: 313px;
+top: 739px;
+
+background: #878787;
+border-radius: 10px;
+
+
+/* menu_read */
+
+position: absolute;
+width: 20px;
+height: 14px;
+left: 8px;
+top: 11px;
+
+background: #E6F3FF;
+
+
+/* Frame 2131330111 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 4.87px;
+
+position: absolute;
+width: 265.51px;
+height: 180.87px;
+left: 83px;
+top: 552px;
+
+
+
+/* Frame 2131330109 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 4px;
+
+width: 264px;
+height: 134px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 2131330106 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px 12px;
+gap: 12.18px;
+
+width: 264px;
+height: 42px;
+
+background: #878787;
+border-radius: 12.1795px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Глава 1 | 4% */
+
+margin: 0 auto;
+width: 83px;
+height: 19px;
+
+font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #E6F3FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* f7:menu */
+
+margin: 0 auto;
+width: 34px;
+height: 34px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* glava_read */
+
+position: absolute;
+left: 12.29%;
+right: 14.18%;
+top: 26.85%;
+bottom: 29.03%;
+
+background: #E6F3FF;
+
+
+/* Frame 2131330107 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px 12px;
+gap: 12.18px;
+
+width: 264px;
+height: 42px;
+
+background: #878787;
+border-radius: 12.1795px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Поиск в книге */
+
+margin: 0 auto;
+width: 99px;
+height: 19px;
+
+font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #E6F3FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* f7:menu */
+
+margin: 0 auto;
+width: 34px;
+height: 34px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search_read */
+
+position: absolute;
+left: 21.12%;
+right: 20.06%;
+top: 19.16%;
+bottom: 22.02%;
+
+border: 2.4359px solid #E6F3FF;
+
+
+/* Frame 2131330108 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px 12px;
+gap: 12.18px;
+
+width: 264px;
+height: 42px;
+
+background: #878787;
+border-radius: 12.1795px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Темы и настройки */
+
+margin: 0 auto;
+width: 128px;
+height: 19px;
+
+font-family: 'SF Pro Display';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: #E6F3FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* f7:menu */
+
+margin: 0 auto;
+width: 34px;
+height: 34px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* customer_read */
+
+position: absolute;
+width: 22px;
+height: 16px;
+left: 6.28px;
+top: 8.9px;
+
+
+
+/* Vector */
+
+position: absolute;
+width: 8.56px;
+height: 10.29px;
+left: 6.28px;
+top: 14.61px;
+
+background: #E6F3FF;
+
+
+/* Vector */
+
+position: absolute;
+width: 13.44px;
+height: 16px;
+left: 14.84px;
+top: 8.9px;
+
+background: #E6F3FF;
+
+
+/* Frame 2131330104 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 4px;
+
+width: 264px;
+height: 42px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 45 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 16px;
+
+width: 63px;
+height: 42px;
+
+background: #878787;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* headphon_read */
+
+width: 32px;
+height: 32px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+height: 26.18px;
+left: 9.09%;
+right: 9.09%;
+top: calc(50% - 26.18px/2 + 0px);
+
+background: #E6F3FF;
+
+
+/* Vector */
+
+position: absolute;
+height: 26.18px;
+left: 9.09%;
+right: 9.09%;
+top: calc(50% - 26.18px/2 + 0px);
+
+background: #E6F3FF;
+
+
+/* Frame 46 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 16px;
+
+width: 63px;
+height: 42px;
+
+background: #878787;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* block_read */
+
+width: 32px;
+height: 32px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 8.33%;
+right: 4.17%;
+top: 12.5%;
+bottom: 12.5%;
+
+background: #E6F3FF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Frame 47 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 16px;
+
+width: 63px;
+height: 42px;
+
+background: #878787;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* pencil_read */
+
+box-sizing: border-box;
+
+width: 24px;
+height: 24px;
+
+border-bottom: 1px solid #E6F3FF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+background: #E6F3FF;
+border: 1.375px solid #E6F3FF;
+
+
+/* Frame 48 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 16px;
+
+width: 63px;
+height: 42px;
+
+background: #878787;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* save_read_off */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 29.17%;
+right: 29.17%;
+top: 12.5%;
+bottom: 12.5%;
+
+border: 2px solid #E6F3FF;

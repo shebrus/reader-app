@@ -1,7 +1,24 @@
 
-> reader-app@1.0.0 start:local
-> node ./scripts/expo-start.js --localhost --clear
+> reader-app@1.0.0 start
+> expo start --localhost --port 8082
 
-Starting project at D:\reader-app-master2\reader-app-master
-› Port 8081 is being used by another process
-› Skipping dev server
+Starting project at D:\reader-app-master5\reader-app-master
+React Compiler enabled
+Starting Metro Bundler
+Waiting on http://localhost:8082
+Logs for your project will appear below.
+Web node_modules\expo-router\entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules\expo-router\entry.js ▓▓▓▓▓░░░░░░░░░░░ 31.4% (116/266)
+λ node_modules\expo-router\node\render.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 68.5% (534/645)
+Web node_modules\expo-router\entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 75.0% (815/941)
+λ node_modules\expo-router\node\render.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 83.5% (1262/1381)
+λ Bundled 9432ms node_modules\expo-router\node\render.js (1579 modules)
+Web node_modules\expo-router\entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.1% (1397/1425)
+
+Metro error: this.validatePath is not a function
+
+Call Stack
+  factory (shared\importedBooksStore.ts)
+  factory (app\index.tsx)
+Web node_modules\expo-router\entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.2% (1398/1425)
+Web Bundled 11456ms node_modules\expo-router\entry.js (1512 modules)

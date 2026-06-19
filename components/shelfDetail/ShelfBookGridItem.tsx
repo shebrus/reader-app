@@ -3,6 +3,7 @@ import { memo } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { BookCardNew } from "../BookCardNew";
+import { getBookAudioTracks, isAudioBookFormat } from "../../shared/audioBook";
 import type { Book } from "../../shared/types";
 
 const BOOK_WIDTH = 108;
@@ -14,8 +15,8 @@ type ShelfBookGridItemProps = {
 
 function ShelfBookGridItemComponent({ book, onPress }: ShelfBookGridItemProps) {
   const progress = getBookProgress(book);
-  const isBookUnavailable = book.id === "3";
-  const isAudioUnavailable = book.id === "4";
+  const hasReadableBook = !isAudioBookFormat(book.fileFormat);
+  const hasAudio = getBookAudioTracks(book).length > 0 || isAudioBookFormat(book.fileFormat);
 
   return (
     <Pressable
@@ -63,20 +64,20 @@ function ShelfBookGridItemComponent({ book, onPress }: ShelfBookGridItemProps) {
         <View style={styles.formatIcons}>
           <Image
             source={
-              isBookUnavailable
-                ? require("../../assets/icons/book-close-icon.png")
-                : require("../../assets/icons/book-icon.png")
+              hasReadableBook
+                ? require("../../assets/icons/book-icon.png")
+                : require("../../assets/icons/book-close-icon.png")
             }
             style={[
               styles.formatIcon,
-              !isBookUnavailable && styles.activeFormatIcon,
+              hasReadableBook && styles.activeFormatIcon,
             ]}
           />
           <Image
             source={require("../../assets/icons/headphones-icon.png")}
             style={[
               styles.formatIcon,
-              !isAudioUnavailable && styles.activeFormatIcon,
+              hasAudio && styles.activeFormatIcon,
             ]}
           />
         </View>

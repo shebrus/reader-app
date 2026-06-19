@@ -1,0 +1,17 @@
+2026-06-18T14:39:20.641Z expo:start:platforms:android:adbReverse Android SDK resolved, but adb was not found at C:\Users\vovaa\AppData\Local\Android\Sdk\platform-tools\adb.exe; skipping ADB reverse.
+2026-06-18T14:39:20.642Z expo:start:server:ngrok Stopping Tunnel
+2026-06-18T14:39:20.644Z expo:start:server:ngrok Global config path: C:\Users\vovaa\.expo\ngrok.yml
+2026-06-18T14:39:20.651Z expo:start:server:ngrok Hostname: fLJYnOY-anonymous-8081.exp.direct
+2026-06-18T14:39:46.150Z expo:start:server:ngrok Resetting project randomness: H_HHYQA
+2026-06-18T14:39:46.259Z expo:start:server:ngrok Stopping Tunnel
+2026-06-18T14:39:46.264Z expo:start:server:ngrok Global config path: C:\Users\vovaa\.expo\ngrok.yml
+2026-06-18T14:39:46.265Z expo:start:server:ngrok Hostname: H_HHYQA-anonymous-8081.exp.direct
+2026-06-18T14:40:11.703Z expo:start:server:ngrok Resetting project randomness: Go-ymFg
+2026-06-18T14:40:11.808Z expo:start:server:ngrok Stopping Tunnel
+2026-06-18T14:40:11.811Z expo:start:server:ngrok Global config path: C:\Users\vovaa\.expo\ngrok.yml
+2026-06-18T14:40:11.812Z expo:start:server:ngrok Hostname: Go-ymFg-anonymous-8081.exp.direct
+CommandError: failed to start tunnel
+
+session closed
+
+Check the Ngrok status page for outages: https://status.ngrok.com/

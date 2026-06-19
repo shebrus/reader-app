@@ -14,6 +14,7 @@ type ShelfBooksScreenProps = {
   title: string;
   books: Book[];
   onImportBook?: () => Promise<void>;
+  onImportAudioBook?: () => Promise<void>;
   onBookPress?: (book: Book) => void;
   onBackPress: () => void;
 };
@@ -24,6 +25,7 @@ export function ShelfBooksScreen({
   title,
   books,
   onImportBook,
+  onImportAudioBook,
   onBookPress,
   onBackPress,
 }: ShelfBooksScreenProps) {
@@ -75,6 +77,7 @@ export function ShelfBooksScreen({
         visible={addSheetVisible}
         onClose={() => setAddSheetVisible(false)}
         onImportBook={onImportBook}
+        onImportAudioBook={onImportAudioBook}
       />
     </SafeAreaView>
   );

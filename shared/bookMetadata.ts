@@ -27,6 +27,10 @@ export async function readBookMetadata(
     if (format === "fb2") {
       return await readFb2Metadata(file, bookId);
     }
+
+    if (format === "zip") {
+      return await readZipBookMetadata(file, bookId);
+    }
   } catch {
     return {};
   }
@@ -92,6 +96,32 @@ async function readFb2Metadata(
     ...(coverImage ? { coverImage } : {}),
     ...(title ? { title } : {}),
   };
+}
+
+async function readZipBookMetadata(
+  file: File,
+  bookId: string,
+): Promise<Partial<BookMetadata>> {
+  const zip = await JSZip.loadAsync(await file.bytes());
+  const fb2File = Object.values(zip.files)
+    .filter((entry) => !entry.dir)
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+    .find((entry) => entry.name.toLowerCase().endsWith(".fb2"));
+
+  if (!fb2File) return {};
+
+  const temporaryFb2 = new File(getCoversDirectory(), `${bookId}-metadata.fb2`);
+  temporaryFb2.write(await fb2File.async("uint8array"));
+
+  try {
+    return await readFb2Metadata(temporaryFb2, bookId);
+  } finally {
+    try {
+      temporaryFb2.delete();
+    } catch {
+      // Metadata extraction should not fail if a temporary file cannot be removed.
+    }
+  }
 }
 
 function findEpubCoverHref(metadata: any, manifestItems: any[]) {

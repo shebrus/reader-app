@@ -1,0 +1,14 @@
+t=2026-06-18T19:38:24+0500 lvl=info msg="open config file" path=C:\\Users\\vovaa\\.expo\\ngrok.yml err=nil
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="ignoring manifest file with unhandled mimetype" name=glyphicons-halflings-regular.svg ext=.svg
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="ignoring manifest file with unhandled mimetype" name=vendor.svg ext=.svg
+t=2026-06-18T19:38:24+0500 lvl=warn msg="can't bind default web address, trying alternatives" obj=web addr=127.0.0.1:4040
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="starting component" obj=app name="signal handler"
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="starting component" obj=app name=web
+t=2026-06-18T19:38:24+0500 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4041
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="starting component" obj=app name=updater
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="starting component" obj=app name="Tunnel session"
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="checking for updates periodically" obj=updater interval=6h0m0s
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="check for update" obj=updater
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="open stream" obj=csess id=62687a670c9b reqtype=0 err=nil
+t=2026-06-18T19:38:24+0500 lvl=dbug msg="encode request" obj=csess id=62687a670c9b sid=3 req="&{Version:[2] ClientID: Extra:{OS:windows Arch:amd64 Authtoken:5W1bR67GNbWcXqmxZzBG1_56GezNeaX6sSRvn8npeQ8 Version:2.3.41 Hostname:tunnel.us.ngrok.com UserAgent:ngrok/2 Metadata: Cookie: HeartbeatInterval:10000000000 HeartbeatTolerance:15000000000 Fingerprint:<nil> UpdateUnsupportedError:0xc0002846b0 StopUnsupportedError:0xc0002846a0 RestartUnsupportedError:0xc000284690}}" err=nil
+t=2026-06-18T19:38:25+0500 lvl=dbug msg="no update available" obj=updater
